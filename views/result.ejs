@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <textarea name="plaintext"  id="result"><%=cipher%></textarea>
+    <button type="button" onclick="var text=document.getElementById('result');text.select();text.setSelectionRange(0,99999);navigator.clipboard.writeText(text.value);document.getElementById('copy').innerHTML='Copied!'" id="copy">Copy</button>
+  </body>
+</html>
