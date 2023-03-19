@@ -19,8 +19,10 @@ CryptoSimple is a proof of concept, entirely developed and writted via command l
 ## Usage
 1. Before beginning, ensure you have created a .env file with values defined for aes_key, rsa_pub, and rsa_priv
 2. Type "npm start" in command line and navigate to localhost:3000 in a browser
-3. Enter desired text input, select between Encrypt/Decrypt and RSA/AES, and press submit
-4. The Results page will be rendered, containing a textarea with the calculated value and a button that copies it to the clipboard
+3. Enter desired text input, select between Encrypt/Decrypt and RSA/AES
+4. If a different key than stored in .env is desired, click the corresponding checkbox and enter the key into the field that appears.
+5. Press submit
+6. The Results page will be rendered, containing a textarea with the calculated value and a button that copies it to the clipboard
 
 ## Planned Features
 1. UI improvements
