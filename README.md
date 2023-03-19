@@ -3,9 +3,9 @@
 
 **Inputs:**      Text (cipher/plaintext), Action (encryption/decryption), Type (rsa/aes)
 
-**Outputs:**     Cipher (when input = plaintext), Plaintext (when input = plaintext) 
+**Outputs:**     Cipher (when input = plaintext), Plaintext (when input = cipher) 
 
-**Functions:**   Encrypt/Decrypt via AES/RSA with keys predefined in an environment variable
+**Functions:**   Encrypt/Decrypt via AES/RSA with keys predefined in an environment variable or specified by user
 
 CryptoSimple is a proof of concept, entirely developed and writted via command line using a Google Pixel 7 Pro, Termux, and Nano
 
