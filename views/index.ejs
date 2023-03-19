@@ -22,6 +22,11 @@
     <input type="radio" name="type" value="rsa" id="rsa" />
     <label for="rsa">RSA</label>
     <br><br>
+    <input type="checkbox" name="externalKey" value="true" id="externalKey" onclick="if(this.checked){document.getElementById('userKey').style.display='block';}else{document.getElementById('userKey').style.display='none';}" />
+    <label for="externalKey">Use Alternate Key</label>
+    <br>
+    <textarea name="userKey" placeholder="Key" style="display: none" id="userKey"></textarea>
+    <br><br>
     <button type="submit">Submit</button>
     </form>
   </body>

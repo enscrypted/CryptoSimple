@@ -28,46 +28,48 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.post("/result", function(req, res, next) {
+  var customKey = req.body.externalKey === undefined ? null : req.body.userKey;
+  var customIv = req.body.externalIv === undefined ? null : req.body.customIv;
   if(req.body.action === "encrypt") {
   if(req.body.type === 'aes') {
-    var encrypted = aesEncrypt(req.body.plaintext);
+    var encrypted = aesEncrypt(req.body.plaintext, customKey, customIv);
     res.render('result', { cipher: encrypted, title:'Results'  });
   }
   if(req.body.type === 'rsa') {
-    var encrypted = rsaEncrypt(req.body.plaintext);
+    var encrypted = rsaEncrypt(req.body.plaintext, customKey);
     res.render('result', {cipher: encrypted, title:'Results'});
   }
   }
   if(req.body.action === 'decrypt') {
   if(req.body.type === 'aes') {
-    var decrypted = aesDecrypt(req.body.plaintext);
+    var decrypted = aesDecrypt(req.body.plaintext, customKey, customIv);
     res.render('result', {cipher: decrypted, title: 'Results'});
   }
   if(req.body.type === 'rsa') {
-    var decrypted = rsaDecrypt(req.body.plaintext);
+    var decrypted = rsaDecrypt(req.body.plaintext, customKey);
     res.render('result', {cipher: decrypted, title: 'Results'});
   }
   }
   res.render('error', {message: 'app broke'});
 });
 
-function aesEncrypt(input) {
-  return aes.encrypt(input, process.env.aes_key, {iv: process.env.aes_iv}).toString();
+function aesEncrypt(input, key, iv) {
+  return aes.encrypt(input, key !== null ? key : process.env.aes_key, {iv: process.env.aes_iv}).toString();
 }
 
-function aesDecrypt(input) {
-  return aes.decrypt(input, process.env.aes_key, {iv: process.env.aes_iv}).toString(CryptoJS.enc.Utf8);
+function aesDecrypt(input, key, iv) {
+  return aes.decrypt(input, key !== null ? key :process.env.aes_key, {iv: process.env.aes_iv}).toString(CryptoJS.enc.Utf8);
 }
 
-function rsaEncrypt(input) {
+function rsaEncrypt(input, key) {
   var  encryptor = new rsa();
-  encryptor.importKey(process.env.rsa_pub);
+  encryptor.importKey(key !== null ? key : process.env.rsa_pub);
   return encryptor.encrypt(input, 'base64');
 }
 
-function rsaDecrypt(input) {
+function rsaDecrypt(input, key) {
   var encryptor = new rsa();
-  encryptor.importKey(process.env.rsa_priv);
+  encryptor.importKey(key !== null ? key : process.env.rsa_priv);
   return encryptor.decrypt(input);
 }
 
