@@ -60,7 +60,7 @@ function aesEncrypt(input, key) {
 function aesDecrypt(input, key) {
   var iv = input.substring(0,32);
   var input = input.substring(32);
-  return aes.decrypt(input, key !== null ? key : process.env.aes_key, {iv: iv !== null ? iv : process.env.aes_iv}).toString(CryptoJS.enc.Utf8);
+  return aes.decrypt(input, key !== null ? key : process.env.aes_key, {iv: iv}).toString(CryptoJS.enc.Utf8);
 }
 
 function rsaEncrypt(input, key) {
