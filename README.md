@@ -1,7 +1,7 @@
 # CryptoSimple
 **Purpose:**     Lightweight, Text-Based Encryption and Decryption
 
-**Inputs:**      Text (cipher/plaintext), Action (encryption/decryption), Type (rsa/aes)
+**Inputs:**      Text (cipher/plaintext), Action (encryption/decryption), Type (rsa/aes), Custom Key (optional)
 
 **Outputs:**     Cipher (when input = plaintext), Plaintext (when input = cipher) 
 
