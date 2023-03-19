@@ -30,24 +30,24 @@ app.use('/users', usersRouter);
 app.post("/result", function(req, res, next) {
   var key = req.body.externalKey == undefined ? null : req.body.userKey;
   if(req.body.action === "encrypt") {
+    var encrypted;
     if(req.body.type === 'aes') {
-      var encrypted = aesEncrypt(req.body.plaintext, key);
-      res.render('result', { cipher: encrypted, title:'Results'  });
+      encrypted = aesEncrypt(req.body.plaintext, key);
     }
     if(req.body.type === 'rsa') {
-      var encrypted = rsaEncrypt(req.body.plaintext, key);
-      res.render('result', {cipher: encrypted, title:'Results'});
+      encrypted = rsaEncrypt(req.body.plaintext, key);
     }
+    res.render('result', { cipher: encrypted, title:'Results'});
   }
   if(req.body.action === 'decrypt') {
+    var decrypted;
     if(req.body.type === 'aes') {
-      var decrypted = aesDecrypt(req.body.plaintext, key);
-      res.render('result', {cipher: decrypted, title: 'Results'});
+      decrypted = aesDecrypt(req.body.plaintext, key);
     }
     if(req.body.type === 'rsa') {
-      var decrypted = rsaDecrypt(req.body.plaintext, key);
-      res.render('result', {cipher: decrypted, title: 'Results'});
+      decrypted = rsaDecrypt(req.body.plaintext, key);
     }
+    res.render('result', {cipher: decrypted, title: 'Results'});
   }
   res.render('error', {message: 'app broke'});
 });
